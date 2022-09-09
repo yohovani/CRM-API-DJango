@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import  JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from Usuarios.models import Usuario
+from Usuarios.models import Cliente
 from Usuarios.serializers import UsuarioSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view
