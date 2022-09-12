@@ -1,16 +1,16 @@
 from rest_framework import serializers
-import Usuarios
 
-class UsuarioSerializer(serializers.Serializer):
+import Usuarios.models
+from Usuarios.models import Empleado
+from Direcciones.models import Domicilio
+from Equipo.models import Equipo
+
+
+class UsuarioSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
-    nombre = serializers.CharField(max_length=100)
-    apellido_paterno = serializers.CharField(max_length=100)
-    apellido_materno = serializers.CharField(max_length=100)
-
-    def create(self, validated_data):
-        return Usuarios.objects.create(validated_data)
-
-    def update(self, instance, validated_data):
-        instance.nombre = validated_data.get('nombre', instance.nombre)
-        instance.apellido_paterno = validated_data.get('apellido_paterno', instance.nombre)
-        instance.apellido_materno = validated_data.get('apellido_materno', instance.nombre)
+    allow_null = True
+    many = True
+    class Meta:
+        model = Usuarios.models.Cliente
+        fields = ['id', 'nombre', 'apellido_paterno', 'apellido_materno', 'telefono', 'domicilio', 'instalador', 'equipo']
+        depth = 1
